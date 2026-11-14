@@ -352,14 +352,28 @@ body{overflow-x:clip;max-width:100%}
       <div class="section-heading"><div><div class="section-kicker">02 / WHERE WE MAKE A DIFFERENCE</div><h2>Explore our <em>programmes</em></h2></div><p>Practical ways to learn, connect and move your engineering career forward.</p></div>
       <div class="program-grid">
         <article class="program-card program-mentorship"><div class="program-top"><span>01</span></div><div class="program-visual mentor-visual"><div class="sun"></div><div class="path path-a"></div><div class="path path-b"></div><span class="visual-word">GROW<br>TOGETHER</span><span class="visual-stamp">NIBAAMS<br>MENTORSHIP</span></div><div class="program-body"><div class="program-tag">MENTORSHIP · COMMUNITY</div><h3>NIBAAMS Mentorship</h3><p>Guidance, accountability and a community of practice to help emerging engineers build confidence and take purposeful career steps.</p><a class="under-link" href="https://forms.gle/7UjqqLuDC5bG7uqh8" target="_blank" rel="noopener noreferrer">Register as mentor or mentee</a><div class="program-choices"><a href="https://nibaams-2026.vercel.app" target="_blank" rel="noopener noreferrer">NIBAAMS member login</a></div></div></article>
-        <article class="program-card program-training"><div class="program-top"><span>02</span></div><div class="program-visual training-visual"><div class="training-disc disc-a"></div><div class="training-disc disc-b"></div><div class="training-disc disc-c"></div><span class="training-type">COMING<br>SOON</span><span class="training-corner">NIBCAP<br>CAREER LAB</span></div><div class="program-body"><div class="program-tag">CAREER ACCELERATION · UPDATES</div><h3>NIBCAP</h3><p>Training registration is not open yet. Visit the NIBCAP updates space for upcoming event announcements, awareness materials and programme news.</p><a class="under-link" href="#nibcap-updates">Explore upcoming updates</a></div></article>
+        <article class="program-card program-training"><div class="program-top"><span>02</span></div><div class="program-visual training-visual"><div class="training-disc disc-a"></div><div class="training-disc disc-b"></div><div class="training-disc disc-c"></div><span class="training-type">COMING<br>SOON</span><span class="training-corner">NIBCAP<br>CAREER LAB</span></div><div class="program-body"><div class="program-tag">CAREER ACCELERATION · UPDATES</div><h3>NIBCAP</h3><p>Training registration is not open yet. Visit the NIBCAP updates space for upcoming event announcements, awareness materials and programme news.</p><a class="under-link" href="NIBCAP.html#events">Explore upcoming updates</a></div></article>
         <article class="program-card program-jobs"><div class="program-top"><span>03</span></div><div class="program-visual jobs-visual"><div class="jobs-window"><div class="window-head"><i></i><i></i><i></i></div><div class="window-line long"></div><div class="window-line"></div><div class="window-pill">OPPORTUNITY FOUND</div></div><span class="jobs-orbit">CONNECT<br>TO WHAT'S<br>NEXT</span><span class="jobs-dot">+</span></div><div class="program-body"><div class="program-tag">JOBS · INDUSTRY CONNECTIONS</div><h3>Job Opportunities</h3><p>Find jobs, internships and contract opportunities through employer engagement and partnerships that open doors for engineering talent.</p><a class="under-link" href="career-board.html">Explore the ERP career board</a></div></article><article class="program-card program-editorial"><div class="program-top"><span>04</span></div><div class="program-visual editorial-visual"><div class="ed-sheet ed-sheet-a"></div><div class="ed-sheet ed-sheet-b"></div><div class="ed-sheet ed-sheet-c"></div><span class="ed-stamp">EDITORIAL<br>DESK</span><span class="ed-word">STORIES<br>THAT MOVE</span></div><div class="program-body"><div class="program-tag">EDITORIAL · PUBLICATIONS</div><h3>Editorial Team</h3><p>Publications, blog posts, programme stories and event galleries that document what RPJD is building and share it with the engineering community.</p><a class="under-link" href="editorial.html">Read our publications &amp; stories</a></div></article>
       </div>
     </section>
 
+    <script type="application/json" id="nibcapPublishedEvents">[]</script>
     <section class="nibcap-updates section-pad" id="nibcap-updates">
       <div class="section-heading"><div><div class="section-kicker">NIBCAP / UPCOMING EVENTS</div><h2>Training updates are <em>on the way</em></h2></div><p>Stay informed about NIBCAP events, career acceleration activities and awareness announcements.</p></div>
-      <div class="nibcap-event-board"><div class="nibcap-event-mark">NIBCAP<br><span>CAREER LAB</span></div><div><span class="event-status">UPCOMING ANNOUNCEMENTS</span><h3>Watch this space for NIBCAP events</h3><p>Event dates, programme details, flyers and awareness materials will be published here when confirmed. Applicant registration is currently closed.</p></div></div>
+      <div class="nibcap-event-board" id="homeNibcapBoard"><div class="nibcap-event-mark">NIBCAP<br><span>CAREER LAB</span></div><div><span class="event-status">UPCOMING ANNOUNCEMENTS</span><div id="homeEventList" aria-live="polite"></div></div></div>
+      <script>
+      /* Mirrors the announcements published in NIBCAP.html so both pages agree. */
+      (function(){var host=document.getElementById("homeEventList");if(!host)return;
+       var list=[];
+       try{list=JSON.parse(document.getElementById("nibcapPublishedEvents").textContent)||[]}catch(e){list=[]}
+       if(!list.length){host.innerHTML='<h3>Watch this space for NIBCAP events</h3><p>Event dates, programme details, flyers and awareness materials will be published here when confirmed. Applicant registration is currently closed.</p>';return}
+       host.innerHTML=list.map(function(e){
+        var d=String(e.date||"DATE TO BE ANNOUNCED").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]});
+        var t=String(e.title||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]});
+        return '<p style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold,#ffc000);margin:0 0 4px">'+d+'</p><h3 style="margin:0 0 6px">'+t+'</h3>';
+       }).join("")+'<p style="margin-top:10px"><a class="under-link" href="NIBCAP.html#events">See all announcements</a></p>';
+      })();
+      </script>
     </section>
 
     <section class="career-board section-pad" id="career-board">
@@ -511,7 +525,7 @@ function showUnit(index) {
     <div class="unit-members-head"><span>UNIT MEMBERS</span><span>${people.length} PEOPLE</span></div>
     <div class="member-grid">${people.map(person => {
       const photo = memberPhotos[person.name];
-      const photoPath = photo ? (photo.startsWith('data:') ? photo : `assets/members/${photo}`) : '';
+      const photoPath = photo && photo.startsWith('data:') ? photo : '';
       const initials = person.name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase();
       return `<span class="member-name${person.lead ? ' lead' : ''}${photo ? ' has-photo' : ''}"><span class="member-avatar">${photo ? `<img src="${photoPath}" alt="" loading="lazy">` : initials}</span><span>${person.name}</span></span>`;
     }).join('')}</div>
